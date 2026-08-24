@@ -12,8 +12,16 @@ pipeline {
                     steps{
                         script {
                             try {
-                                sh "echo Pull Request ${title} created in the reportcov repository"
-                                mail bcc: '', body: '', cc: '', from: '', subject: "Pull Request ${title} created in the reportcov repository", to: 'red_queen@localhost'
+                                // Sanitize title to prevent command injection and header injection
+                                def sanitizedTitle = title?.replaceAll('[^a-zA-Z0-9 ._-]', '_') ?: 'Unknown'
+                                
+                                // Use withEnv to safely pass the sanitized title to shell
+                                withEnv(["SAFE_TITLE=${sanitizedTitle}"]) {
+                                    sh 'echo "Pull Request $SAFE_TITLE created in the reportcov repository"'
+                                }
+                                
+                                // Use sanitized title in email subject to prevent header injection
+                                mail bcc: '', body: '', cc: '', from: '', subject: "Pull Request ${sanitizedTitle} created in the reportcov repository", to: 'red_queen@localhost'
                             }
                             catch (Exception err) {
                                 currentBuild.result = 'SUCCESS'
