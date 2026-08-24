@@ -13,7 +13,7 @@ folder('wonderland-twiddle') {
               id('flag6')
               description('')
               username('flag6')
-              password('710866F2-2CED-4E60-A4EB-223FD892D95A')
+              password("${FLAG6}")
             }
           }
         }

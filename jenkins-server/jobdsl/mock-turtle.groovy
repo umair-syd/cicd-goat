@@ -13,14 +13,14 @@ multibranchPipelineJob('wonderland-mock-turtle') {
               id('mock-turtle-token')
               description('')
               username('mock-turtle-ci')
-              password('03f186631edec80f38b9cc2f7f45870a30cc33e2')
+              password("${MOCK_TURTLE_TOKEN}")
             }
             usernamePassword {
               scope('GLOBAL')
               id('flag10')
               description('')
               username('flag10')
-              password('D54734AB-7B83-4931-A9BB-171476101FDF')
+              password("${FLAG10}")
             }
           }
         }
