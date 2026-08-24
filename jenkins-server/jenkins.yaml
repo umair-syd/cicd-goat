@@ -136,14 +136,14 @@ jenkins:
       users:
       - id: "admin"
         name: "Admin"
-        password: "ciderland5#"
+        password: "${ADMIN_PASSWORD}"
       - id: "alice"
         name: "Alice"
-        password: "alice"
+        password: "${ALICE_PASSWORD}"
       - description: "Agents admin"
         id: "knave"
         name: "knave"
-        password: "rockme"
+        password: "${KNAVE_PASSWORD}"
   slaveAgentPort: 50000
 security:
   apiToken:
