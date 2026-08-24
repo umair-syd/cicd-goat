@@ -4,6 +4,9 @@ parameters:
   VERSION:
     type: string
     default: ""
+  RELEASE_TOKEN:
+    type: string
+    default: ""
 
 jobs:
   ci:
@@ -67,6 +70,19 @@ jobs:
       ORG: cidersecurity
       VERSION: << pipeline.parameters.VERSION >>
     steps:
+      - run:
+          name: Validate release authorization
+          command: |
+            if [ -z "$RELEASE_TOKEN_SECRET" ]; then
+              echo "ERROR: RELEASE_TOKEN_SECRET environment variable is not set in CircleCI project settings"
+              exit 1
+            fi
+            if [ "<< pipeline.parameters.RELEASE_TOKEN >>" != "$RELEASE_TOKEN_SECRET" ]; then
+              echo "ERROR: Unauthorized release attempt - invalid RELEASE_TOKEN"
+              echo "This release workflow can only be triggered by authorized sources with the correct token"
+              exit 1
+            fi
+            echo "Release authorization validated successfully"
       - checkout
       - restore_cache:
           keys:
