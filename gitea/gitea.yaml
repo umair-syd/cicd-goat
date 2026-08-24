@@ -1,29 +1,34 @@
 users:
     jenkins:   
         email: jenkins@wonderland.com
-        password: jenko123%
-        token: a644940c92efe2d1876e16a5d29e6c6d7e199b68
+        # SECURITY: Rotate this password - previously exposed in version control
+        password: REPLACE_WITH_SECURE_PASSWORD_1
+        token: REPLACE_WITH_SECURE_TOKEN_1
     thealice:
         email: alice@wonderland.com
         password: thealice
     jenkins_hatter:
         email: hatter@wonderland.com
-        password: jenjen123&^*
+        # SECURITY: Rotate this password - previously exposed in version control
+        password: REPLACE_WITH_SECURE_PASSWORD_2
     mock-turtle-ci:
         email: turtle@wonderland.com
-        password: tuturjgkjf#$@#%
-        token: 03f186631edec80f38b9cc2f7f45870a30cc33e2
+        # SECURITY: Rotate this password - previously exposed in version control
+        password: REPLACE_WITH_SECURE_PASSWORD_3
+        token: REPLACE_WITH_SECURE_TOKEN_3
     jenkins_caterpillar:
         email: caterpillar@wonderland.com
-        password: 1leg2leg3leg
-        token: 5d3ed5564341d5060c8524c41fe03507e296ca46
+        # SECURITY: Rotate this password - previously exposed in version control
+        password: REPLACE_WITH_SECURE_PASSWORD_4
+        token: REPLACE_WITH_SECURE_TOKEN_4
 orgs:
     Wonderland:
         teams:
             Maintainers:
                 permission: write
                 members:
-                    - jenkins_caterpillar
+                    # SECURITY FIX: Removed jenkins_caterpillar from Maintainers team
+                    # CI identities must not have write access to repositories that Jenkins executes
         repos:
             white-rabbit:
                 private: true
@@ -37,8 +42,13 @@ orgs:
             caterpillar:
                 private: false
                 code: repositories/caterpillar
-                teams:
-                    - Maintainers
+                # SECURITY FIX: Grant jenkins_caterpillar read-only access instead of write via team
+                collaborators:
+                    jenkins_caterpillar: read
+                # SECURITY FIX: Add branch protection to prevent CI identity from pushing malicious code
+                branch_protections:
+                    main:
+                        required_approvals: 1
             mad-hatter:
                 private: true
                 code: repositories/mad-hatter
@@ -89,14 +99,18 @@ orgs:
                 code: repositories/mock-turtle
                 private: true
                 collaborators:
-                    mock-turtle-ci: write
+                    # SECURITY FIX: Changed mock-turtle-ci from write to read access
+                    # CI identities must not have write access to repositories that Jenkins executes
+                    mock-turtle-ci: read
                     jenkins: read
                     thealice: write
                 branch_protections:
                     main:
-                        merge_whitelist_usernames:
-                            - mock-turtle-ci
-                        enable_merge_whitelist: true
+                        # SECURITY FIX: Removed mock-turtle-ci from merge whitelist
+                        # CI identities must not be able to merge code that they will execute
+                        merge_whitelist_usernames: []
+                        enable_merge_whitelist: false
+                        required_approvals: 1
     Cov:
         repos:
             reportcov:
