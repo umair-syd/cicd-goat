@@ -121,8 +121,6 @@ jenkins:
       nodeProperties:
       - envVars:
           env:
-          - key: "GITEA_TOKEN"
-            value: "5d3ed5564341d5060c8524c41fe03507e296ca46"
           - key: "PATH"
             value: "/home/jenkins/.local/bin:$PATH"
       remoteFS: "/home/jenkins"
@@ -136,7 +134,7 @@ jenkins:
       users:
       - id: "admin"
         name: "Admin"
-        password: "ciderland5#"
+        password: "****nd5#"
       - id: "alice"
         name: "Alice"
         password: "alice"
