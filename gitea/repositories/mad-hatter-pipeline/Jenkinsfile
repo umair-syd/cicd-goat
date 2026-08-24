@@ -28,9 +28,7 @@ pipeline {
 
         stage('make'){
             steps {
-              withCredentials([usernamePassword(credentialsId: 'flag3', usernameVariable: 'USERNAME', passwordVariable: 'FLAG')]) {
                 sh 'make || true'
-              }
             }           
         }
     }
