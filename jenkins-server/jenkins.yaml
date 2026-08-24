@@ -79,7 +79,7 @@ jenkins:
           - assignments:
             - "knave"
             name: "hearts"
-            pattern: ".*"
+            pattern: "knave-managed-.*"
             permissions:
               - "Agent/Provision"
               - "Agent/Create"
@@ -136,7 +136,7 @@ jenkins:
       users:
       - id: "admin"
         name: "Admin"
-        password: "ciderland5#"
+        password: "****nd5#"
       - id: "alice"
         name: "Alice"
         password: "alice"
