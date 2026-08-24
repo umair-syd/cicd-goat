@@ -13,14 +13,14 @@ multibranchPipelineJob('wonderland-mad-hatter') {
               id('flag3')
               description('')
               username('flag3')
-              password('ACD6E6B8-3584-4F43-AB9C-ACD080B8EBB2')
+              password("${FLAG3}")
             }
             usernamePassword {
               scope('GLOBAL')
               id('jenkins3')
               description('')
               username('jenkins_hatter')
-              password('jenjen123&^*')
+              password("${JENKINS3_PASSWORD}")
             }
           }
         }

@@ -13,7 +13,7 @@ multibranchPipelineJob('wonderland-dormouse') {
               id('flag9')
               description('')
               username('flag9')
-              password('31350FBC-A959-4B4B-A8BD-DCA7AC9248A6')
+              password("${FLAG9}")
             }
           }
         }

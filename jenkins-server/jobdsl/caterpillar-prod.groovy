@@ -13,7 +13,7 @@ multibranchPipelineJob('wonderland-caterpillar-prod') {
               id('flag2')
               description('')
               username('flag2')
-              password('AEB14966-FFC2-4FB0-BF45-CD903B3535DA')
+              password("${FLAG2}")
             }
           }
         }
