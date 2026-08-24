@@ -9,7 +9,7 @@ multibranchPipelineJob('wonderland-caterpillar-prod') {
           }
           credentials {
             usernamePassword {
-              scope('GLOBAL')
+              scope('SYSTEM')
               id('flag2')
               description('')
               username('flag2')
