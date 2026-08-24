@@ -12,3 +12,5 @@ LABEL org.opencontainers.image.vendor="Cider Security" \
     org.opencontainers.image.revision=$COMMIT_SHA
 
 COPY --chown=ctfd:ctfd data/CTFd /opt/CTFd
+# Remove any tracked secret key file to prevent secret disclosure
+RUN rm -f /opt/CTFd/.ctfd_secret_key

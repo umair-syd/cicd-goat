@@ -1,0 +1,3 @@
+# Exclude secret key files from Docker builds to prevent secret disclosure
+data/CTFd/.ctfd_secret_key
+**/.ctfd_secret_key
