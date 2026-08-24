@@ -20,7 +20,11 @@ COPY --chown=jenkins:jenkins cleanup /var/jenkins_home/cleanup
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli --clean-download-directory -f /usr/share/jenkins/ref/plugins.txt && \
     chmod 755 /var/jenkins_home/cleanup
-COPY --chown=jenkins:jenkins secrets.properties /var/jenkins_home/secrets.properties
-COPY --chown=jenkins:jenkins jenkins.yaml /var/jenkins_home/jenkins.yaml
-COPY --chown=jenkins:jenkins jobdsl/ /var/jenkins_home/jobdsl/
+# Security: secrets.properties, jenkins.yaml, and jobdsl/ must be mounted at runtime
+# as volumes or secrets to prevent credential exposure in image layers.
+# These files should NOT be copied into the image during build.
+# Expected mount paths:
+#   - /var/jenkins_home/secrets.properties
+#   - /var/jenkins_home/jenkins.yaml
+#   - /var/jenkins_home/jobdsl/
 ENTRYPOINT ["/var/jenkins_home/cleanup"]

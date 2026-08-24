@@ -41,6 +41,11 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+    volumes:
+      # Mount sensitive configuration files at runtime to prevent credential exposure in image layers
+      - ./jenkins-server/secrets.properties:/var/jenkins_home/secrets.properties:ro
+      - ./jenkins-server/jenkins.yaml:/var/jenkins_home/jenkins.yaml:ro
+      - ./jenkins-server/jobdsl:/var/jenkins_home/jobdsl:ro
   jenkins_agent:
     image: cidersecurity/goat-jenkins-agent:latest
     build:
