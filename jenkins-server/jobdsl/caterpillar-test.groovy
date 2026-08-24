@@ -14,9 +14,8 @@ multibranchPipelineJob('wonderland-caterpillar-test') {
   }
   configure { node ->
     def traits = node / sources / data / 'jenkins.branch.BranchSource' / source / traits
-    traits << 'org.jenkinsci.plugin.gitea.ForkPullRequestDiscoveryTrait' {
+    traits << 'org.jenkinsci.plugin.gitea.OriginPullRequestDiscoveryTrait' {
       strategyId('2')
-      trust(class: 'org.jenkinsci.plugin.gitea.ForkPullRequestDiscoveryTrait$TrustEveryone')
     }
     def triggers = node / triggers / 'com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger'
     triggers.appendNode('spec', '* * * * *')
