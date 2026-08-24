@@ -21,6 +21,7 @@ RUN python3 -m pip install --no-cache-dir pipenv
 COPY Pipfile* /setup/
 RUN cd /setup && pipenv install --system --deploy
 
+# Copy application code but exclude gitea.yaml (handled by .dockerignore)
 COPY . /setup/
 RUN /setup/check_git.py && chmod 755 /setup/giteacasc/askpass.py /setup/run
 COPY --chown=git:git app.ini /data/gitea/conf/

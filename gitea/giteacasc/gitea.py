@@ -25,7 +25,7 @@ class Gitea(GiteaBase):
             print(res.status_code, res.json())
             res.raise_for_status()
 
-    def create_user(self, username, email, password, must_change_password=False, token=None):
+    def create_user(self, username, email, password, must_change_password=True, token=None):
         res = self.post('/admin/users', json={'username': username,
                                               'email': email,
                                               'password': password,
